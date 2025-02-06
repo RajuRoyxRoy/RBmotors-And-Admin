@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Company Login</title>
+    <style>
+        /* Existing styles remain the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-container {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-group input[type="text"], .form-group input[type="password"] {
+            border-radius: 20px; /* pill shape */
+            padding: 10px;
+        }
+        .form-group select {
+            border-radius: 20px; /* pill shape */
+            padding: 10px;
+            background: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #9b59b6;
+        }
+        .login-button {
+            width: 200px; /* set a fixed width of 200 pixels */
+            padding: 12px;
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 20px; /* pill shape */
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .login-button:hover {
+            background-color: #8e44ad;
+        }
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            z-index: -1;
+        }
+        .login-container .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        .form-group select {
+            background: #fff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .form-group select:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <img src="./image/R.B.png" alt="RB Logo" class="logo">
+    <h2>Login to Your Company</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="company">Select Company:</label>
+            <select name="company" id="company" required>
+                <option value="" disabled selected>Select your company</option>
+                <option value="admin">Admin</option>
+                <option value="rb_motors">RB Motors</option>
+                <option value="rb_station">RB Station</option>
+                <option value="sb_station">SB Station</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="login-button">Login</button>
+    </form>
+    <div id="message" style="margin-top: 20px; color: red;"></div>
+</div>
+
+<!-- Link to the external JavaScript file -->
+<script src="login.js"></script>
+
+</body>
+</html>
