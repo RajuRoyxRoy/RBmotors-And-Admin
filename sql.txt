@@ -1,0 +1,21 @@
+-- Create database
+CREATE DATABASE company_login;
+
+-- Use the database
+USE company_login;
+
+-- Create the users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_name VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL
+);
+
+-- Insert initial users
+INSERT INTO users (company_name, username, password_hash) VALUES
+('Super Admin', 'superadmin', SHA2('password123', 256)),
+('Admin', 'admin', SHA2('password123', 256)),
+('RB Motors', 'rbmotors', SHA2('password123', 256)),
+('RB Station', 'rbstation', SHA2('password123', 256)),
+('SB Station', 'sbstation', SHA2('password123', 256));
