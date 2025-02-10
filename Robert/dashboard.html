@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RB Group Admin Panel</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <img src="./Employee/image/R.B.png" alt="RB Group of Companies">
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+                </li>
+                <li><a href="./attendance/attendance_management.php"><i
+                            class="fas fa-clipboard-list"></i><span>Attendance</span></a></li>
+                <li><a href="./Employee/addnewclients.php"><i class="fas fa-users"></i><span>Employee</span></a></li>
+                <li><a href="./warehouse/solditem.php"><i class="fas fa-chart-line"></i><span>Daily Sales</span></a>
+                </li>
+                <li><a href="./warehouse/selling.php"><i class="fas fa-file-invoice"></i><span>Billing</span></a></li>
+                <li><a href="./warehouse/index.php"><i class="fas fa-warehouse"></i><span>Warehouse</span></a></li>
+                <li><a href="./laser account/ledger_management.php"><i class="fas fa-book"></i><span>Ledger
+                            Account</span></a></li>
+                <li><a href="./Gatepass/process_gatepass.php"><i class="fas fa-book"></i><span>Gatepass</span></a></li>
+                <li><a href="./warehouse/profit_graphs.php"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="search">
+                    <i class="fa fa-search"></i>
+                    <input type="search" name="search" id="search" placeholder="Search..." onkeyup="searchFunction()" />
+                    <button onclick="searchFunction()">Search</button>
+                </div>
+                <div class="profile">
+                    <div class="profile-avatar"><i class="fa fa-user-o"></i></div>
+                    <div class="name">RB MOTOR</div>
+                </div>
+            </div>
+            <div class="dashboard-text">
+                <h1>Welcome to the Dashboard</h1>
+                <p>Track your company's performance</p>
+            </div>
+            <div class="cards-container">
+                <div class="card" onclick="location.href='./attendance/attendance_management.php'">
+                    <div class="icon" style="background-color: #cfffc0;"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Attendance</h3>
+                </div>
+                <div class="card" onclick="location.href='./Employee/employee.html'">
+                    <div class="icon" style="background-color: #ACDDDE;"><i class="fas fa-users"></i></div>
+                    <h3>Employee</h3>
+                </div>
+                <div class="card" onclick="location.href='./warehouse/solditem.php'">
+                    <div class="icon" style="background-color: #DFD6F6;"><i class="fas fa-chart-line"></i></div>
+                    <h3>Daily Sales</h3>
+                </div>
+                <div class="card" onclick="location.href='./warehouse/selling.php'">
+                    <div class="icon" style="background-color: #eedd82;"><i class="fas fa-file-invoice"></i></div>
+                    <h3>Billing</h3>
+                </div>
+                <div class="card" onclick="location.href='./warehouse/index.php'">
+                    <div class="icon" style="background-color: #82cda8;"><i class="fas fa-warehouse"></i></div>
+                    <h3>Warehouse</h3>
+                </div>
+                <div class="card" onclick="location.href='./laser account/ledger_management.php'">
+                    <div class="icon" style="background-color: #82cda8;"><i class="fas fa-book"></i></div>
+                    <h3>Ledger Account</h3>
+                </div>
+                <div class="card" onclick="location.href='./Gatepass/process_gatepass.php'">
+                    <div class="icon" style="background-color: #f5beff;"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Gatepass</h3>
+                </div>
+                <div class="card" onclick="location.href='./warehouse/profit_graphs.php'">
+                    <div class="icon" style="background-color: #f5beff;"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Reports</h3>
+                </div>
+            </div>
+
+            <div class="todo-list-container">Overview</h2>
+                <p>Here you can manage your clients, view important contacts, and keep track of your tasks.</p>
+            </div>
+
+            <!-- To-Do List -->
+            <div class="todo-list-container">
+                <h3>To-Do List</h3>
+                <ul id="todo-list">
+                    <!-- Tasks will be dynamically added here -->
+                </ul>
+                <input type="text" id="new-task" placeholder="Add new task" />
+                <button onclick="addTask()">Add Task</button>
+            </div>
+
+            <!-- Important Contacts -->
+            <div class="contacts-list-container">
+                <h3>Important Contacts</h3>
+                <ul id="contacts-list">
+                    <!-- Contacts will be dynamically added here -->
+                </ul>
+                <input type="text" id="new-contact" placeholder="Add new contact" />
+                <button onclick="addContact()">Add Contact</button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+
+        function searchFunction() {
+            const searchInput = document.getElementById('search');
+            const searchText = searchInput.value.toLowerCase();
+
+            // Search through cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                if (cardTitle.includes(searchText)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Search through tasks
+            const tasks = document.querySelectorAll('#todo-list li');
+            tasks.forEach(task => {
+                const taskText = task.querySelector('span').textContent.toLowerCase();
+                if (taskText.includes(searchText)) {
+                    task.style.display = '';
+                } else {
+                    task.style.display = 'none';
+                }
+            });
+
+            // Search through contacts
+            const contacts = document.querySelectorAll('#contacts-list li');
+            contacts.forEach(contact => {
+                const contactText = contact.querySelector('span').textContent.toLowerCase();
+                if (contactText.includes(searchText)) {
+                    contact.style.display = '';
+                } else {
+                    contact.style.display = 'none';
+                }
+            });
+        }
+
+        // To-Do List and Contacts List
+        function addTask() {
+            const taskInput = document.getElementById('new-task');
+            const taskText = taskInput.value;
+            if (taskText) {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `<span>${taskText}</span><button class="text-red-500" onclick="removeTask(this)">Remove</button>`;
+                document.getElementById('todo-list').appendChild(li);
+                taskInput.value = '';
+                saveTasks();
+            }
+        }
+
+        function removeTask(button) {
+            button.parentElement.remove();
+            saveTasks();
+        }
+
+        function addContact() {
+            const contactInput = document.getElementById('new-contact');
+            const contactText = contactInput.value;
+            if (contactText) {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `<span>${contactText}</span><button class="text-red-500" onclick="removeContact(this)">Remove</button>`;
+                document.getElementById('contacts-list').appendChild(li);
+                contactInput.value = '';
+                saveContacts();
+            }
+        }
+
+        function removeContact(button) {
+            button.parentElement.remove();
+            saveContacts();
+        }
+
+        function saveTasks() {
+            const tasks = [];
+            const taskItems = document.querySelectorAll('#todo-list li span');
+            taskItems.forEach(item => {
+                tasks.push(item.textContent);
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `<span>${task}</span><button class="text-red-500" onclick="removeTask(this)">Remove</button>`;
+                document.getElementById('todo-list').appendChild(li);
+            });
+        }
+
+        function saveContacts() {
+            const contacts = [];
+            const contactItems = document.querySelectorAll('#contacts-list li span');
+            contactItems.forEach(item => {
+                contacts.push(item.textContent);
+            });
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+        }
+
+        function loadContacts() {
+            const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+            contacts.forEach(contact => {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `<span>${contact}</span><button class="text-red-500" onclick="removeContact(this)">Remove</button>`;
+                document.getElementById('contacts-list').appendChild(li);
+            });
+        }
+
+        window.onload = function () {
+            loadTasks();
+            loadContacts();
+        };
+    </script>
+
+</body>
+
+</html>
